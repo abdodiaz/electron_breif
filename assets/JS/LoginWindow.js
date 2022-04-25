@@ -17,8 +17,4 @@ document.querySelector("#loginBtn").addEventListener("click", ()=>{
             clickked =false
         }, 3600*1.5)
     }
-
-
-
-
 })

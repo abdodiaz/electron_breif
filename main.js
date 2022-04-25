@@ -42,7 +42,7 @@ app.on("ready", ()=> {
     })
     
     ipcMain.on("loginData", (err, data)=> {
-        console.log(data)
+
         login(data)
 
     })
@@ -50,21 +50,18 @@ app.on("ready", ()=> {
 })
 
 async function login(data){
-    
-console.log(data)
-
     let statususer
     await fetch(`http://localhost:5000/user/login`, {
         method: 'POST',
-        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        headers: {'Content-Type':'application/json'},
         body:JSON.stringify(data)
     })
-    .then(res => res.text())
+    .then(res => res.json())
     .then((body) => {
-        statususer = body
+         statususer = body.message
     })
-    //await console.log(statususer)
-    if(statususer == 'error'){
+     
+    if(statususer == 'Invalid email '){
         console.log("False Login Information, try Again!")
     }else{
         CreateWindow(data)
